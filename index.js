@@ -15,16 +15,23 @@ const PORT = 5000;
 dbConnection();
 
 app.use(bodyParser.json());
-app.use(cors());
+// app.use(cors());
 
-app.use("/",(req,res)=>{
-    res.json({message:"hello to my server"});
-})
+app.use(cors({
+    origin: '*', // Allow all origins for now; you can restrict this later
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.use('/api/users', userRoutes);
 app.use('/api/steps' , stepRouter);
 app.use('/api/bmi' ,    bmiRouter );
 app.use('/api/continuous-steps', continuousStepRoutes);
+
+app.use("/",(req,res)=>{
+    res.json({message:"hello to my server"});
+})
+
 
 
 app.listen(PORT , ()=>{
