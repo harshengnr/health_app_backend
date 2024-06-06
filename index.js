@@ -17,6 +17,10 @@ dbConnection();
 app.use(bodyParser.json());
 app.use(cors());
 
+app.use("/",(req,res)=>{
+    res.json({message:"hello to my server"});
+})
+
 app.use('/api/users', userRoutes);
 app.use('/api/steps' , stepRouter);
 app.use('/api/bmi' ,    bmiRouter );
